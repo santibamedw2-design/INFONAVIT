@@ -1,0 +1,16 @@
+{
+  "name": "infonavit-automation-backend",
+  "version": "1.0.0",
+  "description": "Backend for Infonavit Automation via Docker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "playwright": "^1.40.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

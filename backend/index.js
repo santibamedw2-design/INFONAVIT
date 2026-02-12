@@ -5,6 +5,11 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Ruta base para verificar que el servidor está vivo
+app.get('/', (req, res) => {
+  res.send('Infonavit Automation Backend is running!');
+});
+
 // Endpoint para obtener información de seguidores y nombre
 app.get('/api/social-info', async (req, res) => {
   const { url } = req.query;
@@ -43,17 +48,17 @@ app.get('/api/screenshot', async (req, res) => {
   try {
     browser = await chromium.launch({ headless: true });
     const page = await browser.newPage();
-    
+
     // Ajustar viewport para simular móvil si es necesario
     await page.setViewportSize({ width: 375, height: 812 });
 
     await page.goto(url, { waitUntil: 'networkidle' });
-    
+
     // Esperar un poco para que carguen elementos dinámicos
     await page.waitForTimeout(2000);
 
     const buffer = await page.screenshot({ fullPage: false });
-    
+
     res.set('Content-Type', 'image/png');
     res.send(buffer);
   } catch (e) {

@@ -10,10 +10,11 @@ app.get('/', (req, res) => {
 });
 
 async function getBrowser() {
+  const executablePath = await chromium.executablePath();
   return await puppeteer.launch({
-    args: chromium.args,
+    args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
     defaultViewport: chromium.defaultViewport,
-    executablePath: await chromium.executablePath(),
+    executablePath: executablePath,
     headless: chromium.headless,
     ignoreHTTPSErrors: true,
   });
